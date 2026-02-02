@@ -54,14 +54,13 @@
 
     /* Fullscreen overlay для YES */
     #overlay {
-      display: none;
+      display: none; /* СКРЫТ по умолчанию */
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background: rgba(255, 230, 230, 0.95);
-      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -141,10 +140,8 @@
     });
 
     yesButton.addEventListener('click', () => {
-      // показать overlay
-      overlay.style.display = 'flex';
-      // убрать кнопки
-      buttonsContainer.style.display = 'none';
+      overlay.style.display = 'flex';       // показываем overlay
+      buttonsContainer.style.display = 'none'; // скрываем кнопки
     });
   </script>
 

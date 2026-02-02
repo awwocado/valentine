@@ -85,11 +85,12 @@
       opacity: 1;
     }
 
-    #overlay h2 {
-      font-size: 32px;
-      margin-bottom: 20px;
+    #overlay pre {
+      font-size: 24px;
       color: #ff4d6d;
       text-align: center;
+      margin-bottom: 20px;
+      line-height: 1.2;
     }
 
     #overlay img {
@@ -122,9 +123,13 @@
     <button id="no">no</button>
   </div>
 
-  <!-- overlay для YES -->
+  <!-- overlay для YES с кроликами -->
   <div id="overlay">
-    <h2>I knew it! 💘</h2>
+    <pre id="overlay-text">
+(\_/)        (\_/)
+(  •_•)      (•_• )
+/ >💛    💙 < \
+    </pre>
     <img id="overlay-img" src="" alt="Valentine GIF">
   </div>
 
@@ -179,7 +184,7 @@
       overlay.classList.add('show');
       buttonsContainer.style.display = 'none';
 
-      // создаем сердечки
+      // создаем сердечки вокруг клика
       for (let i = 0; i < 15; i++) {
         const heart = document.createElement('div');
         heart.classList.add('heart');

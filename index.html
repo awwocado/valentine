@@ -3,42 +3,45 @@
 <head>
   <meta charset="UTF-8">
   <title>Valentine?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     body {
       height: 100vh;
+      margin: 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       font-family: Arial, sans-serif;
       background: #ffe6e6;
+      overflow: hidden;
     }
 
     h1 {
-      margin-bottom: 30px;
-    }
-
-    .buttons {
-      position: relative;
-      width: 300px;
-      height: 150px;
+      margin-bottom: 40px;
+      text-align: center;
     }
 
     button {
-      padding: 12px 24px;
+      padding: 14px 26px;
       font-size: 18px;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
-      position: absolute;
     }
 
     #yes {
-      left: 50px;
-      bottom: 20px;
+      background: #ff4d6d;
+      color: white;
+      margin-bottom: 20px;
     }
 
     #no {
-      right: 50px;
-      bottom: 20px;
+      position: absolute;
+      background: #cccccc;
+      color: black;
+      transition: top 0.2s ease, left 0.2s ease;
     }
   </style>
 </head>
@@ -46,28 +49,43 @@
 
   <h1>Will you be my Valentine? ❤️</h1>
 
-  <div class="buttons">
-    <button id="yes" onclick="alert('Yay! ❤️')">YES</button>
-    <button id="no">no</button>
-  </div>
+  <button id="yes" onclick="alert('Yay! ❤️')">YES</button>
+  <button id="no">no</button>
 
   <script>
     const noButton = document.getElementById('no');
-    const container = document.querySelector('.buttons');
 
-    noButton.addEventListener('mouseenter', () => {
-      const containerRect = container.getBoundingClientRect();
-      const buttonRect = noButton.getBoundingClientRect();
+    const texts = [
+      'no',
+      'are you sure?',
+      'really?',
+      'think again 😏'
+    ];
 
-      const maxX = containerRect.width - buttonRect.width;
-      const maxY = containerRect.height - buttonRect.height;
+    let clickCount = 0;
+
+    function moveButton() {
+      const buttonWidth = noButton.offsetWidth;
+      const buttonHeight = noButton.offsetHeight;
+
+      const maxX = window.innerWidth - buttonWidth;
+      const maxY = window.innerHeight - buttonHeight;
 
       const randomX = Math.random() * maxX;
       const randomY = Math.random() * maxY;
 
       noButton.style.left = randomX + 'px';
       noButton.style.top = randomY + 'px';
+    }
+
+    noButton.addEventListener('click', () => {
+      clickCount++;
+      noButton.textContent = texts[clickCount % texts.length];
+      moveButton();
     });
+
+    // начальная позиция
+    moveButton();
   </script>
 
 </body>

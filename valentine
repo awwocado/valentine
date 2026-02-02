@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine?</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #ffe6e6;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      position: relative;
+      width: 300px;
+      height: 150px;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      cursor: pointer;
+      position: absolute;
+    }
+
+    #yes {
+      left: 50px;
+      bottom: 20px;
+    }
+
+    #no {
+      right: 50px;
+      bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Will you be my Valentine? ❤️</h1>
+
+  <div class="buttons">
+    <button id="yes" onclick="alert('Yay! ❤️')">YES</button>
+    <button id="no">no</button>
+  </div>
+
+  <script>
+    const noButton = document.getElementById('no');
+    const container = document.querySelector('.buttons');
+
+    noButton.addEventListener('mouseenter', () => {
+      const containerRect = container.getBoundingClientRect();
+      const buttonRect = noButton.getBoundingClientRect();
+
+      const maxX = containerRect.width - buttonRect.width;
+      const maxY = containerRect.height - buttonRect.height;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      noButton.style.left = randomX + 'px';
+      noButton.style.top = randomY + 'px';
+    });
+  </script>
+
+</body>
+</html>

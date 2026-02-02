@@ -19,8 +19,13 @@
     }
 
     h1 {
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       text-align: center;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
     }
 
     button {
@@ -34,13 +39,16 @@
     #yes {
       background: #ff4d6d;
       color: white;
-      margin-bottom: 20px;
     }
 
     #no {
-      position: absolute;
       background: #cccccc;
       color: black;
+    }
+
+    /* активируется ТОЛЬКО после первого клика */
+    #no.escape {
+      position: absolute;
       transition: top 0.2s ease, left 0.2s ease;
     }
   </style>
@@ -49,11 +57,14 @@
 
   <h1>Will you be my Valentine? ❤️</h1>
 
-  <button id="yes" onclick="alert('Yay! ❤️')">YES</button>
-  <button id="no">no</button>
+  <div class="buttons">
+    <button id="yes" onclick="alert('Yay! ❤️')">YES</button>
+    <button id="no">no</button>
+  </div>
 
   <script>
     const noButton = document.getElementById('no');
+    const buttonsContainer = document.querySelector('.buttons');
 
     const texts = [
       'no',
@@ -63,6 +74,7 @@
     ];
 
     let clickCount = 0;
+    let escaped = false;
 
     function moveButton() {
       const buttonWidth = noButton.offsetWidth;
@@ -81,11 +93,16 @@
     noButton.addEventListener('click', () => {
       clickCount++;
       noButton.textContent = texts[clickCount % texts.length];
+
+      if (!escaped) {
+        // первый клик: вырываем кнопку из контейнера
+        escaped = true;
+        noButton.classList.add('escape');
+        document.body.appendChild(noButton);
+      }
+
       moveButton();
     });
-
-    // начальная позиция
-    moveButton();
   </script>
 
 </body>

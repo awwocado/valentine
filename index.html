@@ -27,6 +27,8 @@
     .buttons {
       display: flex;
       gap: 20px;
+      z-index: 1; /* чтобы кнопки были поверх overlay */
+      position: relative;
     }
 
     button {
@@ -52,7 +54,7 @@
       transition: top 0.2s ease, left 0.2s ease;
     }
 
-    /* Fullscreen overlay для YES */
+    /* overlay для YES */
     #overlay {
       display: none; /* СКРЫТ по умолчанию */
       position: fixed;
@@ -93,7 +95,7 @@
   <!-- overlay для YES -->
   <div id="overlay">
     <h2>I knew it! 💘</h2>
-    <img src="https://media.giphy.com/media/NddKDRg7KfFHkHdJ19/giphy.gif" alt="Valentine GIF">
+    <img id="overlay-img" src="" alt="Valentine GIF">
   </div>
 
   <script>
@@ -101,6 +103,7 @@
     const buttonsContainer = document.querySelector('.buttons');
     const yesButton = document.getElementById('yes');
     const overlay = document.getElementById('overlay');
+    const overlayImg = document.getElementById('overlay-img');
 
     const texts = [
       'no',
@@ -140,8 +143,9 @@
     });
 
     yesButton.addEventListener('click', () => {
-      overlay.style.display = 'flex';       // показываем overlay
-      buttonsContainer.style.display = 'none'; // скрываем кнопки
+      overlayImg.src = "https://media.giphy.com/media/NddKDRg7KfFHkHdJ19/giphy.gif"; // ставим гифку только после клика
+      overlay.style.display = 'flex';
+      buttonsContainer.style.display = 'none';
     });
   </script>
 
